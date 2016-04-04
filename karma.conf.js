@@ -27,7 +27,7 @@ module.exports = function (config) {
             debug:true,
             devtool: 'inline-source-map', //just do inline source maps instead of the default
             output: {
-                library: 'gremlinConsole',
+                library: 'GCGraphSONTextPlugin',
                 libraryTarget: 'umd'
             },
             module: {
@@ -61,10 +61,13 @@ module.exports = function (config) {
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
         logLevel: config.LOG_INFO,
 
-        browsers: ['Firefox'],
+        browsers: [
+            'Firefox'
+        ],
         plugins: [
             'karma-phantomjs-launcher',
             'karma-firefox-launcher',
+            'karma-chrome-launcher',
             'karma-mocha',
             'karma-chai',
             'karma-webpack',

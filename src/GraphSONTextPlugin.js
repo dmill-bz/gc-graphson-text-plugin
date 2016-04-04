@@ -15,7 +15,7 @@ class GraphSONTextPlugin {
      */
     load(main) {
         //create a custom client
-        const client = new Client(main.options.port, main.options.host, main.options.driverOptions);
+        const client = new Client(main.options.host, main.options.port, main.options.driverOptions);
         //change the main's client to the custom one.
         main.client = client;
     }

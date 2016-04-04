@@ -1,6 +1,8 @@
 import Plugin from './GraphSONTextPlugin';
 
-const plugin = new Plugin();
+export function init() {
+    return new Plugin();
+}
 
-export default plugin;
+export default init;
 

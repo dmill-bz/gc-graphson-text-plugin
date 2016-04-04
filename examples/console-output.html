@@ -10,7 +10,7 @@
 
     <!-- IMPORTANT INCLUSIONS START -->
     <link rel="stylesheet" type="text/css" href="gremlin-console-umd/css/default.css">
-    <script src="gremlin-console-umd/gremlin-console.js"></script>
+    <script src="gremlin-console-umd/gremlin-console.min.js"></script>
     <script src="../umd/gc-graphson-text-plugin.js"></script>
     <!-- IMPORTANT INCLUSIONS END-->
 
@@ -115,6 +115,7 @@
      * @version 1.0
      */
     var gc = gremlinConsole.create('#window', '#input');
+    gc.register(GCGraphSONTextPlugin.init());
 
   </script>
 </html>
