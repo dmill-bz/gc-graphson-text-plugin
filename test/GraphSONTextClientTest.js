@@ -1,4 +1,4 @@
-import Client from '../src/GraphSONTextClient.js';
+import Client from '../src/GraphSONTextClient';
 
 describe('GraphSONTextClient', () => {
     describe('.construct()', () => {
@@ -66,6 +66,17 @@ describe('GraphSONTextClient', () => {
             client.execute("5+5", (result) => {
                 result.constructor.name.should.equal('GraphSONTextResult');
                 expect(result._rawResults).to.eql([{text:["10"], json:[10]}]);
+                done();
+            });
+        });
+
+        it('callback should receive Error', (done) => {
+            const client = new Client();
+            client.execute("5+doesnotexist", (result) => {
+                result.constructor.name.should.equal('GraphSONTextResult');
+                result._rawError.constructor.name.should.eql('Error');
+                result._rawError.message.replace(/Script[0-9]+/g, "Script").should.eql("startup failed:\nScript.groovy: 1: [Static type checking] - Cannot find matching method int#plus(java.lang.Object). Please check if the declared type is right and if the method exists.\n @ line 1, column 1.\n   5+doesnotexist\n   ^\n\n1 error\n (Error 597)");
+                expect(result._rawResults).to.eql(undefined);
                 done();
             });
         });

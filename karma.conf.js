@@ -4,13 +4,13 @@ module.exports = function (config) {
 
         basePath: '',
 
-        frameworks: ['mocha', 'chai', 'sinon'],
+        frameworks: ['mocha', 'chai-jquery', 'sinon', 'chai', 'jquery-1.8.3'],
         singleRun: true, //just run once by default
 
          client: {
             //mocha configuration
             mocha: {
-                timeout: 3000 // adding 1s to default timeout of 2000ms
+                timeout: 5000 // adding 3s to default timeout of 2000ms
             }
         },
 
@@ -76,7 +76,9 @@ module.exports = function (config) {
             'karma-coverage',
             'karma-coveralls',
             'karma-html2js-preprocessor',
-            'karma-sinon'
+            'karma-sinon',
+            'karma-chai-jquery',
+            'karma-jquery'
         ]
 
     });

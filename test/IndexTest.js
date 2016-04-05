@@ -10,7 +10,7 @@ describe('index.js .init()', () => {
 
 
 describe('integration', () => {
-    it('should be loaded byt the console', () => {
+    it('should be loaded by the console', () => {
         document.body.innerHTML = __html__['test/index.html'];
         const gc = GremlinConsole("#window", "#input");
         const plugin = init();
