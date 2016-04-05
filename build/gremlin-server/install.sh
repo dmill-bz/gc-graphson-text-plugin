@@ -8,6 +8,11 @@ export JRE_HOME=/usr/lib/jvm/java-8-oracle
 wget --no-check-certificate -O $HOME/apache-gremlin-server-$GREMLINSERVER_VERSION-incubating-bin.zip http://archive.apache.org/dist/incubator/tinkerpop/$GREMLINSERVER_VERSION-incubating/apache-gremlin-server-$GREMLINSERVER_VERSION-incubating-bin.zip
 unzip $HOME/apache-gremlin-server-$GREMLINSERVER_VERSION-incubating-bin.zip -d $HOME/
 
+#Install plugin
+mkdir $HOME/apache-gremlin-server-$GREMLINSERVER_VERSION-incubating/ext/gremlinbin-plugin
+mkdir $HOME/apache-gremlin-server-$GREMLINSERVER_VERSION-incubating/ext/gremlinbin-plugin/plugin
+wget --no-check-certificate -O $HOME/apache-gremlin-server-$GREMLINSERVER_VERSION-incubating/ext/gremlinbin-plugin/plugin/gremlinbin-plugin-1.0-SNAPSHOT.jar http://pommeverte.github.io/bin/gremlinbin-plugin-1.0-SNAPSHOT.jar
+
 # get gremlin-server configuration files
 cp ./build/gremlin-server/gremlin-server-js.yaml $HOME/apache-gremlin-server-$GREMLINSERVER_VERSION-incubating/conf/
 
