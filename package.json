@@ -2,7 +2,7 @@
   "name": "gc-graphson-text-plugin",
   "version": "0.1.0",
   "description": "plugin for gremlin-console that makes the console output text results rather than json",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel ./src -d lib",
     "build:all": "npm run build && npm run build:umd && npm run build:min",
@@ -23,7 +23,7 @@
     "babel-preset-stage-2": "~6.5.0",
     "babel-register": "~6.7.2",
     "gremlin": "jbmusso/gremlin-javascript",
-    "gremlin-console": "^0.9.2",
+    "gremlin-console": "^0.9.3",
     "highland": "^2.7.3",
     "jquery": "~2.2.1"
   },
