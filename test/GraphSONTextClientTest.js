@@ -75,7 +75,7 @@ describe('GraphSONTextClient', () => {
             client.execute("5+doesnotexist", (result) => {
                 result.constructor.name.should.equal('GraphSONTextResult');
                 result._rawError.constructor.name.should.eql('Error');
-                result._rawError.message.replace(/Script[0-9]+/g, "Script").should.eql("startup failed:\nScript.groovy: 1: [Static type checking] - Cannot find matching method int#plus(java.lang.Object). Please check if the declared type is right and if the method exists.\n @ line 1, column 1.\n   5+doesnotexist\n   ^\n\n1 error\n (Error 597)");
+                result._rawError.message.replace(/Script[0-9]+/g, "Script").should.eql("No such property: doesnotexist for class: Script (Error 597)");
                 expect(result._rawResults).to.eql(undefined);
                 done();
             });
