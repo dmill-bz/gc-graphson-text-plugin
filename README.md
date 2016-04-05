@@ -23,6 +23,7 @@ serializers:
 ##### Using ES2015/2016
 ```javascript
 import GremlinConsole from 'gremlin-console';
+import GCGraphSONTextPlugin from 'gc-graphson-text-plugin';
 
 //create a console + input combo by passing css selectors to GremlinConsole
 const gc = GremlinConsole('#console-window', '#console-input');
