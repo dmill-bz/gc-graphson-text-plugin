@@ -3,6 +3,8 @@ node_js:
 - 5.9
 - 5
 sudo: required
+addons:
+  firefox: "44.0"
 install:
 - sh -c ./build/jdk8-install.sh
 - sh -c ./build/gremlin-server/install.sh
