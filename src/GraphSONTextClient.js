@@ -1,4 +1,4 @@
-import Result from './GraphSONTextResult';
+import Parser from './GraphSONTextParser';
 import BaseClient from 'gremlin-console/lib/DriverClient';
 import highland from 'highland';
 
@@ -54,18 +54,7 @@ class GraphSONTextClient extends BaseClient{
                 });
             },
             ...options
-        });
-    }
-
-    /**
-     * Build a result
-     *
-     * @param  {Object} Error from the driver.
-     * @param  {String} results a response result string
-     * @return {Result} a result object
-     */
-    buildResult(err, results) {
-        return new Result(err, results);
+        }, new Parser());
     }
 }
 

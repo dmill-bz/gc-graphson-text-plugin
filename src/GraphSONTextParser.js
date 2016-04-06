@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Html from 'gremlin-console/lib/Html';
-import Result from 'gremlin-console/lib/Result';
+import Parser from 'gremlin-console/lib/Parser';
 
 /**
  * Handles logic related to results sent back to the console
@@ -10,7 +10,18 @@ import Result from 'gremlin-console/lib/Result';
  *
  * @author Dylan Millikin <dylan.millikin@gmail.com>
  */
-class GraphSONTextResult extends Result {
+class GraphSONTextParser extends Parser {
+
+    /**
+     * Creates a Parser object
+     *
+     * @param  {Error} err     A potential error from the database.
+     * @param  {Mixed} results The server results for a query
+     * @return {Parser} A populated Parser object
+     */
+    create(err, results) {
+        return new GraphSONTextParser(err, results);
+    }
 
     /**
      * Get generic results.
@@ -53,4 +64,4 @@ class GraphSONTextResult extends Result {
     }
 }
 
-export default GraphSONTextResult;
+export default GraphSONTextParser;

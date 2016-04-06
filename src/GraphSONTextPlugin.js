@@ -1,4 +1,5 @@
 import Client from './GraphSONTextClient';
+import Parser from './GraphSONTextParser';
 
 /**
  * Client that handles responses from the application/gremlinbin mimeType
@@ -14,10 +15,12 @@ class GraphSONTextPlugin {
      * @return {Void}
      */
     load(main) {
+        main.parser = new Parser();
         //create a custom client
-        const client = new Client(main.options.host, main.options.port, main.options.driverOptions);
+        const client = new Client(main.options.host, main.options.port, main.options.driverOptions, main.parser);
         //change the main's client to the custom one.
         main.client = client;
+
     }
 }
 

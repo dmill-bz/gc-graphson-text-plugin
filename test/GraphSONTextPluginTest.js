@@ -22,10 +22,10 @@ describe('integration', () => {
 
         gc.client.constructor.name.should.eql('GraphSONTextClient');
 
-        gc.on('results', (query, result) => {
+        gc.on('results', (query, parser) => {
             spy();
             query.should.eql("5+5");
-            expect(result._rawResults).to.eql([{text:["10"], json: [10]}]);
+            expect(parser._rawResults).to.eql([{text:["10"], json: [10]}]);
             assert.isOk(spy.called, "spy wasn't called");
             setTimeout(() => {
                 window.html().should.eql('<div class="port-section"><div class="port-query">gremlin&gt; 5+5</div><div class="port-response text">==&gt;<span class="number">10</span><br></div><div class="port-response json" style="display: none;"><span class="number">10</span><br></div></div>');
