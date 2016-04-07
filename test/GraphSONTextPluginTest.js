@@ -7,7 +7,8 @@ describe('integration', () => {
         const gc = GremlinConsole("#window", "#input");
         const plugin = new Plugin();
         plugin.load(gc);
-        gc.client.constructor.name.should.eql('GraphSONTextClient');
+        gc.initClient();
+        gc.client.constructor.name.should.eql('DriverClient');
     });
 
     it('should allow console to return text', (done) => {
@@ -19,8 +20,9 @@ describe('integration', () => {
         const spy = sinon.spy();
 
         plugin.load(gc);
+        gc.initClient();
 
-        gc.client.constructor.name.should.eql('GraphSONTextClient');
+        gc.client.constructor.name.should.eql('DriverClient');
 
         gc.on('results', (query, parser) => {
             spy();
@@ -40,5 +42,66 @@ describe('integration', () => {
         input.trigger(e);
     });
 });
+
+describe('Client.execute()', () => {
+
+        it('should execute correctly with: query + callback', () => {
+            document.body.innerHTML = __html__['test/index.html'];
+            const gc = GremlinConsole("#window", "#input");
+            const plugin = new Plugin();
+            plugin.load(gc);
+            gc.initClient();
+            gc.client.execute("5+5", () => {});
+        });
+
+        it('should execute correctly with: query + bindings + callback', () => {
+            document.body.innerHTML = __html__['test/index.html'];
+            const gc = GremlinConsole("#window", "#input");
+            const plugin = new Plugin();
+            plugin.load(gc);
+            gc.initClient();
+            gc.client.execute("5+variable", {variable:5}, () => {});
+        });
+
+        it('callback should receive GraphSONTextParser object', (done) => {
+            document.body.innerHTML = __html__['test/index.html'];
+            const gc = GremlinConsole("#window", "#input");
+            const plugin = new Plugin();
+            plugin.load(gc);
+            gc.initClient();
+            gc.client.execute("5+5", (parser) => {
+                parser.constructor.name.should.equal('GraphSONTextParser');
+                expect(parser._rawResults).to.eql([{text:["10"], json:[10]}]);
+                done();
+            });
+        });
+
+        it('callback should receive Error', (done) => {
+            document.body.innerHTML = __html__['test/index.html'];
+            const gc = GremlinConsole("#window", "#input");
+            const plugin = new Plugin();
+            plugin.load(gc);
+            gc.initClient();
+            gc.client.execute("5+doesnotexist", (parser) => {
+                parser.constructor.name.should.equal('GraphSONTextParser');
+                parser._rawError.constructor.name.should.eql('Error');
+                parser._rawError.message.replace(/Script[0-9]+/g, "Script").should.eql("No such property: doesnotexist for class: Script (Error 597)");
+                expect(parser._rawResults).to.eql(undefined);
+                done();
+            });
+        });
+
+        it('should return the right data with bindings', (done) => {
+            document.body.innerHTML = __html__['test/index.html'];
+            const gc = GremlinConsole("#window", "#input");
+            const plugin = new Plugin();
+            plugin.load(gc);
+            gc.initClient();
+            gc.client.execute("5+variable", {variable:5}, (parser) => {
+                expect(parser._rawResults).to.eql([{text:["10"], json:[10]}]);
+                done();
+            });
+        });
+    });
 
 

@@ -15,6 +15,8 @@ describe('integration', () => {
         const gc = GremlinConsole("#window", "#input");
         const plugin = init();
         gc.register(plugin);
-        gc.client.constructor.name.should.eql('GraphSONTextClient');
+
+        gc.initClient();
+        gc.client.constructor.name.should.eql('DriverClient');
     });
 });
