@@ -31,7 +31,7 @@ class GraphSONTextParser extends Parser {
      * @return {Mixed} raw server results
      */
     getResults() {
-        if(this.getRawResults() !== null && typeof this.getRawResults()[0] !== "undefined") {
+        if(this.getRawResults() !== null && typeof this.getRawResults()[0] !== "undefined" && typeof this.getRawResults()[0].json !== "undefined") {
             return this.getRawResults()[0].json;
         } else {
             return [];
@@ -46,7 +46,7 @@ class GraphSONTextParser extends Parser {
      */
     getHtmlResults() {
         var textResultSet = '';
-        if(this.getRawResults() !== null && typeof this.getRawResults()[0] !== "undefined") {
+        if(this.getRawResults() !== null && typeof this.getRawResults()[0] !== "undefined" && typeof this.getRawResults()[0].text !== "undefined") {
             this.getRawResults()[0].text.forEach( (entry) => {
                 textResultSet += '==>'+Html.jsonSyntaxHighlight(entry) + '<br/>';
             });

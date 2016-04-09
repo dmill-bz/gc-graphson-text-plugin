@@ -48,6 +48,16 @@ describe('GraphSONTextParser', () => {
             const parser = new Parser({message:"error message"}, null);
             expect(parser.getResults()).to.eql([]);
         });
+
+        it('should return [] on [] results', () => {
+            const parser = new Parser({message:"error message"}, []);
+            expect(parser.getResults()).to.eql([]);
+        });
+
+        it('should return [] on undefined json results [{}]', () => {
+            const parser = new Parser({message:"error message"}, [{}]);
+            expect(parser.getResults()).to.eql([]);
+        });
     });
 
     describe('.getHtmlResults()', () => {
@@ -71,6 +81,13 @@ describe('GraphSONTextParser', () => {
 
         it('should return "" on empty results', () => {
             const parser = new Parser({message:"error message"}, []);
+            const htmlResults = parser.getHtmlResults();
+            htmlResults.constructor.name.should.eql('String');
+            htmlResults.should.eql('');
+        });
+
+        it('should return "" on undefined text results [{}]', () => {
+            const parser = new Parser({message:"error message"}, [{}]);
             const htmlResults = parser.getHtmlResults();
             htmlResults.constructor.name.should.eql('String');
             htmlResults.should.eql('');
