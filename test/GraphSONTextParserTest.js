@@ -56,5 +56,19 @@ describe('GraphSONTextParser', () => {
             assert($(htmlResults).eq(1).css('display') == "none", "json response should not be displayed");
             htmlResults.replace(/\n */g,'').should.eql('<div class="port-response text">==&gt;key=result&gt;<br></div><div class="port-response json" style="display: none;">{<span class="key">"key":</span> <span class="string">"result&gt;"</span>}<br></div>');
         });
+
+        it('should return "" on null results', () => {
+            const parser = new Parser({message:"error message"}, null);
+            const htmlResults = parser.getHtmlResults();
+            htmlResults.constructor.name.should.eql('String');
+            htmlResults.should.eql('');
+        });
+
+        it('should return "" on empty results', () => {
+            const parser = new Parser({message:"error message"}, []);
+            const htmlResults = parser.getHtmlResults();
+            htmlResults.constructor.name.should.eql('String');
+            htmlResults.should.eql('');
+        });
     });
 });

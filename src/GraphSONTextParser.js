@@ -42,15 +42,19 @@ class GraphSONTextParser extends Parser {
      */
     getHtmlResults() {
         var textResultSet = '';
-        this.getRawResults()[0].text.forEach( (entry) => {
-            textResultSet += '==>'+Html.jsonSyntaxHighlight(entry) + '<br/>';
-        });
-        var jsonResultSet = '';
-        this.getResults().forEach( (entry) => {
-            jsonResultSet += Html.jsonSyntaxHighlight(entry) + '<br/>';
-        });
-        return $('<div>').append($('<div>').addClass("port-response text").html(textResultSet))
-                         .append($('<div>').hide().addClass("port-response json").html(jsonResultSet)).html();
+        if(this.getRawResults() !== null && typeof this.getRawResults()[0] !== "undefined") {
+            this.getRawResults()[0].text.forEach( (entry) => {
+                textResultSet += '==>'+Html.jsonSyntaxHighlight(entry) + '<br/>';
+            });
+            var jsonResultSet = '';
+            this.getResults().forEach( (entry) => {
+                jsonResultSet += Html.jsonSyntaxHighlight(entry) + '<br/>';
+            });
+            return $('<div>').append($('<div>').addClass("port-response text").html(textResultSet))
+                             .append($('<div>').hide().addClass("port-response json").html(jsonResultSet)).html();
+        } else {
+            return '';
+        }
     }
 
     /**
