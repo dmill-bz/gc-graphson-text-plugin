@@ -43,6 +43,11 @@ describe('GraphSONTextParser', () => {
             const parser = new Parser({message:"error message"}, [{text:["id=lala"], json: [{id:"lala"}]}]);
             expect(parser.getResults()).to.eql([{id:"lala"}]);
         });
+
+        it('should return [] on null results', () => {
+            const parser = new Parser({message:"error message"}, null);
+            expect(parser.getResults()).to.eql([]);
+        });
     });
 
     describe('.getHtmlResults()', () => {

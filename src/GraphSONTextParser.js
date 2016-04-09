@@ -31,7 +31,11 @@ class GraphSONTextParser extends Parser {
      * @return {Mixed} raw server results
      */
     getResults() {
-        return this.getRawResults()[0].json;
+        if(this.getRawResults() !== null && typeof this.getRawResults()[0] !== "undefined") {
+            return this.getRawResults()[0].json;
+        } else {
+            return [];
+        }
     }
 
     /**
